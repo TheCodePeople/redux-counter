@@ -1,18 +1,20 @@
+import { useSelector } from "react-redux";
 import "./App.css";
-import { initialState, dispatch } from "./store";
+import { store } from "./store";
 
 function App() {
+  const currentValue = useSelector((state) => state.count);
   function handleIncrement() {
-    dispatch({ type: "count/increment" });
+    store.dispatch({ type: "count/increment" });
   }
   function handleDecrement() {
-    dispatch({ type: "count/decrement" });
+    store.dispatch({ type: "count/decrement" });
   }
   return (
     <div className="App">
       <header className="App-header">
         <button onClick={handleIncrement}>+</button>
-        <p>{initialState.count}</p>
+        <p>{currentValue}</p>
         <button onClick={handleDecrement}>-</button>
       </header>
     </div>
