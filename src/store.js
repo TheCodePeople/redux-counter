@@ -1,34 +1,35 @@
-import { createStore } from "redux";
+const createStore = (reducer) => {
+  let initialState = {
+    count: 0,
+  };
 
-let initialState = {
-  count: 0,
+  const dispatch = (action) => {
+    initialState = reducer(initialState, action);
+    console.log("🚀 ~ state:", initialState); // Log state after each dispatch
+  };
+
+  const getState = () => {
+    return initialState;
+  };
+
+  return { getState, dispatch };
 };
 
-// function dispatch(action) {
-//   initialState = countReducer(initialState, action);
-//   console.log("🚀 ~ dispatch ~ initialState:", initialState);
-//   return initialState;
-// }
-// TODO: Define your store here
-const store = createStore(countReducer);
-
-const selectValue = (state) => state.count;
-const currentValue = selectValue(store.getState());
-console.log("🚀 ~ currentValue:", currentValue);
-function countReducer(state = initialState, action) {
-  console.log("🚀 ~ countReducer ~ initialState:", state);
-  console.log("🚀 ~ countReducer ~ action:", action);
+function countReducer(state, action) {
   switch (action.type) {
     case "count/increment":
       return { count: state.count + 1 };
     case "count/decrement":
       return { count: state.count - 1 };
-
     default:
-      break;
+      return state; // Return state as default
   }
-  return state;
 }
-console.log(store.getState()); // { count: 0 }
 
-export { store, currentValue };
+const store = createStore(countReducer);
+store.dispatch({ type: "count/increment" });
+store.dispatch({ type: "count/increment" });
+store.dispatch({ type: "count/increment" });
+console.log("🚀 ~ store:", store.getState());
+
+export default store;
