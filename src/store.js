@@ -5,7 +5,6 @@ const createStore = (reducer) => {
 
   const dispatch = (action) => {
     initialState = reducer(initialState, action);
-    console.log("🚀 ~ state:", initialState); // Log state after each dispatch
   };
 
   const getState = () => {
@@ -27,6 +26,8 @@ function countReducer(state, action) {
 }
 
 const store = createStore(countReducer);
+store.dispatch({ type: "count/increment" });
+store.dispatch({ type: "count/increment" });
 store.dispatch({ type: "count/increment" });
 store.dispatch({ type: "count/increment" });
 store.dispatch({ type: "count/increment" });
