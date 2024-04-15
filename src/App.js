@@ -2,7 +2,7 @@ import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
   DECREMENT,
-  INCREASE_BY_AMOUNT,
+  INCREMENT_BY_AMOUNT,
   INCREMENT,
   RESET,
 } from "./reducers/counterReducer";
@@ -29,9 +29,9 @@ function App() {
     dispatch(RESET);
   };
 
-  const handleIncreaseByAmount = (e) => {
+  const handleIncrementByAmount = (e) => {
     e.preventDefault();
-    dispatch({ ...INCREASE_BY_AMOUNT, payload: desiredAmount });
+    dispatch({ ...INCREMENT_BY_AMOUNT, payload: desiredAmount });
   };
 
   return (
@@ -50,7 +50,7 @@ function App() {
             value={desiredAmount}
             onChange={(e) => setDesiredAmount(e.target.value)}
           />
-          <button type="submit" onClick={handleIncreaseByAmount}>
+          <button type="submit" onClick={handleIncrementByAmount}>
             Increase
           </button>
         </form>
