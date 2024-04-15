@@ -1,11 +1,15 @@
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
-import { DECREMENT, INCREMENT } from "./reducers/counterReducer";
+import {
+  DECREMENT,
+  INCREASE_BY_AMOUNT,
+  INCREMENT,
+  RESET,
+} from "./reducers/counterReducer";
 import { useState } from "react";
 
 function App() {
-  const [inputNumber, setInputNum] = useState(0);
-  console.log("🚀 ~ App ~ inputNumber:", inputNumber);
+  const [desiredAmount, setDesiredAmount] = useState(0);
 
   const getCurrentValue = useSelector((state) => state.counter.count);
   const dispatch = useDispatch();
@@ -18,15 +22,16 @@ function App() {
   };
 
   const handleDecrement = () => {
-    // const incrementAction = { type: "count/increment" };
-    // dispatch(incrementAction);
-
     dispatch(DECREMENT);
   };
 
-  const handleDouble = (e) => {
+  const handleReset = () => {
+    dispatch(RESET);
+  };
+
+  const handleIncreaseByAmount = (e) => {
     e.preventDefault();
-    dispatch({ type: "count/double", payload: inputNumber });
+    dispatch({ ...INCREASE_BY_AMOUNT, payload: desiredAmount });
   };
 
   return (
@@ -35,21 +40,22 @@ function App() {
         <button onClick={handleIncrement}>+</button>
         <p>{getCurrentValue}</p>
         <button onClick={handleDecrement}>-</button>
-      </header>
 
-      <form>
-        <label>Add Sth</label>
-        <input
-          type="number"
-          placeholder="Add sth"
-          name="inputNumber"
-          value={inputNumber}
-          onChange={(e) => setInputNum(e.target.value)}
-        />
-        <button type="submit" onClick={handleDouble}>
-          Double
-        </button>
-      </form>
+        <form style={{ display: "flex", flexDirection: "column" }}>
+          <label>Enter the desired amount to increase by:</label>
+          <input
+            type="number"
+            placeholder="Add sth"
+            name="desiredAmount"
+            value={desiredAmount}
+            onChange={(e) => setDesiredAmount(e.target.value)}
+          />
+          <button type="submit" onClick={handleIncreaseByAmount}>
+            Increase
+          </button>
+        </form>
+        <button onClick={handleReset}>Reset</button>
+      </header>
     </div>
   );
 }
