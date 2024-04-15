@@ -2,11 +2,8 @@ import "./App.css";
 
 import { useSelector, useDispatch } from "react-redux";
 
-const selectCount = (state) => state.counter.count;
-
 function App() {
-  const count = useSelector(selectCount);
-  console.log("🚀 ~ App ~ count:", count);
+  const count = useSelector((state) => state.count);
   const dispatch = useDispatch();
 
   function handleIncrement() {
