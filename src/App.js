@@ -1,18 +1,18 @@
 import "./App.css";
-import { initialState, dispatch } from "./store";
 
 function App() {
   function handleIncrement() {
-    dispatch({ type: "count/increment" });
+    // TODO: Dispatch an action to update the state. Use the useDispatch from react-redux
   }
   function handleDecrement() {
-    dispatch({ type: "count/decrement" });
+    // TODO: Dispatch an action to update the state. Use the useDispatch from react-redux
   }
   return (
     <div className="App">
       <header className="App-header">
         <button onClick={handleIncrement}>+</button>
-        <p>{initialState.count}</p>
+        {/* Replace the following with an actual value */}
+        <p>0</p>
         <button onClick={handleDecrement}>-</button>
       </header>
     </div>
