@@ -1,4 +1,5 @@
 import "./App.css";
+import store from "./store";
 
 function App() {
   function handleIncrement() {
