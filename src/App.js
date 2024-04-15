@@ -1,37 +1,34 @@
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  DECREMENT,
-  INCREMENT_BY_AMOUNT,
-  INCREMENT,
-  RESET,
-} from "./reducers/counterReducer";
+  increment,
+  decrement,
+  incrementByAmount,
+  reset,
+} from "./features/counter/counterSlice";
 import { useState } from "react";
 
 function App() {
   const [desiredAmount, setDesiredAmount] = useState(0);
 
-  const getCurrentValue = useSelector((state) => state.counter.count);
+  const getCurrentValue = useSelector((state) => state.count);
   const dispatch = useDispatch();
 
   const handleIncrement = () => {
-    // const incrementAction = { type: "count/increment" };
-    // dispatch(incrementAction);
-
-    dispatch(INCREMENT);
+    dispatch(increment());
   };
 
   const handleDecrement = () => {
-    dispatch(DECREMENT);
+    dispatch(decrement());
   };
 
   const handleReset = () => {
-    dispatch(RESET);
+    dispatch(reset(0));
   };
 
   const handleIncrementByAmount = (e) => {
     e.preventDefault();
-    dispatch({ ...INCREMENT_BY_AMOUNT, payload: desiredAmount });
+    dispatch(incrementByAmount(desiredAmount));
   };
 
   return (
